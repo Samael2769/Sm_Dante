@@ -10,6 +10,6 @@
 
 int sm_dante()
 {
-    printf("Hello World\n");
+    dante_generator(10, 10);
     return 0;
 }

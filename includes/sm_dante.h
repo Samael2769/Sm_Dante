@@ -9,5 +9,6 @@
 #define SM_DANTE_H_
 
 int sm_dante();
+int dante_generator(int size_x, int size_y);
 
 #endif /* !SM_DANTE_H_ */
