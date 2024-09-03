@@ -33,6 +33,18 @@ void print_map(int **map, int size_x, int size_y)
     }
 }
 
+void print_int_map(int **map, int size_x, int size_y)
+{
+    for (int i = 0; i < size_y; i++)
+    {
+        for (int j = 0; j < size_x; j++)
+        {
+            printf("%d", map[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 void free_map(int **map, int size_y)
 {
     for (int i = 0; i < size_y; i++)
