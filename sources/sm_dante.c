@@ -10,6 +10,6 @@
 
 int sm_dante()
 {
-    dante_generator(10, 10);
+    dante_generator(21, 21);
     return 0;
 }
