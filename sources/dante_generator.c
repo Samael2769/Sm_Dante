@@ -20,26 +20,54 @@ int **init_map(int size_x, int size_y)
 
 void print_map(int **map, int size_x, int size_y)
 {
+    for (int i = 0; i < size_x + 2; ++i)
+    {
+        printf("X");
+    }
+    printf("\n");
     for (int i = 0; i < size_y; i++)
     {
+        printf("X");
         for (int j = 0; j < size_x; j++)
         {
+            
             if (map[i][j] == 0)
                 printf("X");
             else
                 printf(" ");
         }
+        printf("X");
         printf("\n");
+
     }
+    for (int i = 0; i < size_x + 2; ++i)
+    {
+        printf("X");
+    }
+    printf("\n");
 }
 
 void print_int_map(int **map, int size_x, int size_y)
 {
-    for (int i = 0; i < size_y; i++)
+    for (int i = 0; i < size_y + 2; i++)
     {
-        for (int j = 0; j < size_x; j++)
+        if (i == 0 || i == size_y + 1)
         {
-            printf("%d", map[i][j]);
+            for (int j = 0; j < size_x + 2; j++)
+            {
+                printf("1");
+            }
+            printf("\n");
+            continue;
+        }
+        for (int j = 0; j < size_x + 2; j++)
+        {
+            if (j == 0 || j == size_x + 1)
+            {
+                printf("1");
+            }
+            else
+                printf("%d", map[i][j]);
         }
         printf("\n");
     }
