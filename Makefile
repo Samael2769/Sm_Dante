@@ -14,6 +14,8 @@ LIB_DIR			=	lib/sm_libc/
 SRC_FILES		=	sm_dante.c			\
 					dante_generator.c	\
 					depth_first_backtracking.c	\
+					breath_first_search.c	\
+					dante_algorithm.c	\
 
 SRC_FILES_MAIN	=	main.c			\
 

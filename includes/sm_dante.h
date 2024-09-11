@@ -10,5 +10,6 @@
 
 int sm_dante();
 int dante_generator(int size_x, int size_y);
+int dante_algorithm(void);
 
 #endif /* !SM_DANTE_H_ */
