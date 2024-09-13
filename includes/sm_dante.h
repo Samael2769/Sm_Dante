@@ -10,6 +10,6 @@
 
 int sm_dante();
 int dante_generator(int size_x, int size_y);
-int dante_algorithm(void);
+int dante_algorithm(int N, int M, int **maze);
 
 #endif /* !SM_DANTE_H_ */

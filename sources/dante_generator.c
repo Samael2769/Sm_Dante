@@ -49,25 +49,11 @@ void print_map(int **map, int size_x, int size_y)
 
 void print_int_map(int **map, int size_x, int size_y)
 {
-    for (int i = 0; i < size_y + 2; i++)
+    for (int i = 0; i < size_y; i++)
     {
-        if (i == 0 || i == size_y + 1)
+        for (int j = 0; j < size_x; j++)
         {
-            for (int j = 0; j < size_x + 2; j++)
-            {
-                printf("1");
-            }
-            printf("\n");
-            continue;
-        }
-        for (int j = 0; j < size_x + 2; j++)
-        {
-            if (j == 0 || j == size_x + 1)
-            {
-                printf("1");
-            }
-            else
-                printf("%d", map[i][j]);
+            printf("%d", map[i][j]);
         }
         printf("\n");
     }

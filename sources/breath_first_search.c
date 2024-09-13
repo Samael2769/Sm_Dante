@@ -1,5 +1,5 @@
-
 #include "dante_algorithm.h"
+#include <stdlib.h>
 
 // Mouvement possible dans 4 directions (haut, bas, gauche, droite)
 int row[] = {-1, 1, 0, 0};
@@ -31,14 +31,20 @@ int isEmpty(Queue* q) {
     return q->front == q->rear;
 }
 
-// Vérifier si un mouvement est valide
-int isValid(int x, int y, int N, int M, int maze[N][M], int visited[N][M]) {
-    return (x >= 0 && x < N && y >= 0 && y < M && maze[x][y] == 0 && !visited[x][y]);
+// Vérifier si un mouvement est valide (les 1 représentent les passages et les 0 les murs)
+int isValid(int x, int y, int N, int M, int **maze, int **visited) {
+    return (x >= 0 && x < N && y >= 0 && y < M && maze[x][y] == 1 && !visited[x][y]);
 }
 
 // BFS pour trouver le chemin le plus court
 int bfs(int N, int M, int **maze, Point start, Point end) {
-    int visited[N][M];
+    // Allocation dynamique pour le tableau visited
+    int **visited = (int **)malloc(N * sizeof(int *));
+    for (int i = 0; i < N; i++) {
+        visited[i] = (int *)malloc(M * sizeof(int));
+    }
+
+    // Initialiser le tableau visited à 0
     for (int i = 0; i < N; i++)
         for (int j = 0; j < M; j++)
             visited[i][j] = 0;
@@ -54,6 +60,10 @@ int bfs(int N, int M, int **maze, Point start, Point end) {
 
         // Si on atteint la fin
         if (current.x == end.x && current.y == end.y) {
+            // Libération de la mémoire avant de retourner
+            for (int i = 0; i < N; i++)
+                free(visited[i]);
+            free(visited);
             return 1; // Chemin trouvé
         }
 
@@ -69,6 +79,11 @@ int bfs(int N, int M, int **maze, Point start, Point end) {
             }
         }
     }
+
+    // Libération de la mémoire si aucun chemin n'a été trouvé
+    for (int i = 0; i < N; i++)
+        free(visited[i]);
+    free(visited);
 
     return 0; // Pas de chemin trouvé
 }
