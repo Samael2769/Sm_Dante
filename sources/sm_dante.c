@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include "sm_dante.h"
-#include "dante_generator.h"
 
 int sm_dante()
 {
@@ -19,6 +18,7 @@ int sm_dante()
         .size_y = size_y,
         .map = maze
     };
+
     print_int_map(maze, size_x, size_y);
     maze = depth_first_backtracking(&map);
     print_int_map(maze, size_x, size_y);

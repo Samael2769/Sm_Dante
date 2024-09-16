@@ -1,12 +1,7 @@
 
 #pragma once
 
-typedef struct map_s
-{
-    int **map;
-    int size_x;
-    int size_y;
-} map_t;
+#include "struct.h"
 
 int **depth_first_backtracking(map_t *map);
 void print_map(int **map, int size_x, int size_y);
