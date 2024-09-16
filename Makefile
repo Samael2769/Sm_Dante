@@ -16,6 +16,7 @@ SRC_FILES		=	sm_dante.c			\
 					depth_first_backtracking.c	\
 					breath_first_search.c	\
 					dante_algorithm.c	\
+					gameplay.c	\
 
 SRC_FILES_MAIN	=	main.c			\
 
