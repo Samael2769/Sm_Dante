@@ -61,7 +61,6 @@ int **depth_first_backtracking(map_t *map)
     int start_y = (rand() % (map->size_y / 2)) * 2;
     dfs(map->map, visited.map, start_x, start_y, map->size_x, map->size_y);
     free_map(visited.map, visited.size_y);
-    print_map(map->map, map->size_x, map->size_y);
     return map->map;
 }
 

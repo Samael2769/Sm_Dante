@@ -3,11 +3,8 @@
 #include "dante_algorithm.h"
 
 
-int dante_algorithm(int N, int M, int **maze)
+int dante_algorithm(int N, int M, int **maze, Point start, Point end)
 {
-    Point start = {0, 0}; // Point de départ
-    Point end = {4, 4};   // Point d'arrivée
-
     // Appel de BFS
     if (bfs(N, M, maze, start, end)) {
         printf("Chemin trouvé !\n");

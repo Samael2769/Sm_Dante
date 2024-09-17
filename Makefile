@@ -34,7 +34,7 @@ NAME			=	sm_dante
 
 ##############################################################
 
-CFLAGS			=	-W -Wall -Wextra
+CFLAGS			=	-W -Wall -Wextra 
 
 CPPFLAGS		=	-I./includes
 
@@ -57,7 +57,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_MAIN)
 	@$(PRNT) -e "\e[0;31m Compiling ${NAME}... \e[0m"
-	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN)
+	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) -lncurses
 
 make_lib:
 	@$(PRNT) -e "\e[0;31m Making lib $(LIB_DIR)... \e[0m"

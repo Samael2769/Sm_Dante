@@ -19,9 +19,14 @@ int sm_dante()
         .map = maze
     };
 
-    print_int_map(maze, size_x, size_y);
-    maze = depth_first_backtracking(&map);
-    print_int_map(maze, size_x, size_y);
-    dante_algorithm(size_x, size_y, maze);
+    Point start = {0, 0};
+    Point end = {size_x - 2 , size_y - 2};
+
+    //print_int_map(map.map, size_x, size_y);
+    dante_generator(&map, size_x, size_y);
+    //print_int_map(map.map, size_x, size_y);
+    dante_algorithm(size_x, size_y, map.map, start, end);
+    //print_map(map.map, size_x, size_y);
+    gameplay(&map, start, end);
     return 0;
 }

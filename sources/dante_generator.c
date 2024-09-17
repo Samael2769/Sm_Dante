@@ -20,7 +20,7 @@ int **init_map(int size_x, int size_y)
 
 void print_map(int **map, int size_x, int size_y)
 {
-    for (int i = 0; i < size_x + 2; ++i)
+    for (int i = 0; i < size_x + 1; ++i)
     {
         printf("X");
     }
@@ -36,13 +36,8 @@ void print_map(int **map, int size_x, int size_y)
             else
                 printf(" ");
         }
-        printf("X");
         printf("\n");
 
-    }
-    for (int i = 0; i < size_x + 2; ++i)
-    {
-        printf("X");
     }
     printf("\n");
 }
@@ -69,13 +64,11 @@ void free_map(int **map, int size_y)
 }
 
 
-int dante_generator(int size_x, int size_y)
+int dante_generator(map_t *map, int size_x, int size_y)
 {
-    map_t map;
-    map.size_x = size_x;
-    map.size_y = size_y;
-    map.map = init_map(size_x, size_y);
-    depth_first_backtracking(&map);
-    free_map(map.map, size_y);
+    map->size_x = size_x;
+    map->size_y = size_y;
+    map->map = init_map(size_x, size_y);
+    map->map = depth_first_backtracking(map);
     return 0;
 }
