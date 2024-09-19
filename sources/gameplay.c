@@ -1,6 +1,6 @@
 #include "struct.h"
-#include <ncurses.h>
-
+#include "sm_timer.h"
+#include <time.h>
 
 int print_map_ncurses(map_t *map, Point start, Point end, Point player)
 {
@@ -71,21 +71,58 @@ int is_same_point(Point a, Point b)
     return 0;
 }
 
+int is_end_game(map_t *map, Point player, Point end, sm_timer_t timer)
+{
+    if (is_same_point(player, end)) {
+        return 1;
+    }
+    if (timer.is_finished) {
+        return 2;
+    }
+    return 0;
+}
+
 
 int gameplay(map_t *map, Point start, Point end)
 {
     initscr();
     noecho();
+    nodelay(stdscr, TRUE);
+    sm_timer_t timer = create_timer(10);
+
+    time_t start_time = time(NULL);
+    time_t last_time = start_time;
+    time_t current_time;
     bool is_end = false;
     Point player = start;
     while(is_end != true) {
         print_map_ncurses(map, start, end, player);
         move_player(map, &player, end);
-        if (is_same_point(player, end)) {
-            is_end = true;
+
+        current_time = time(NULL);
+        if (difftime(current_time, last_time) >= 1) {
+            update_timer(&timer);
+            last_time = current_time;
         }
+        print_time(timer, 0, map->size_y + 1);
         refresh();
+        switch (is_end_game(map, player, end, timer)) {
+            case 1:
+                is_end = true;
+                break;
+            case 2:
+                is_end = true;
+                break;
+            default:
+                break;
+        }
+        napms(10);
     }
     endwin();
+    if (is_end_game(map, player, end, timer) == 1) {
+        printf("You win !\n");
+    } else {
+        printf("You lose !\n");
+    }
     return 0;
 }

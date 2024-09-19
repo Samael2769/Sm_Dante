@@ -17,6 +17,7 @@ SRC_FILES		=	sm_dante.c			\
 					breath_first_search.c	\
 					dante_algorithm.c	\
 					gameplay.c	\
+					sm_timer.c \
 
 SRC_FILES_MAIN	=	main.c			\
 
