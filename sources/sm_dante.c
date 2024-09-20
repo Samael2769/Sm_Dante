@@ -7,26 +7,43 @@
 
 #include <stdio.h>
 #include "sm_dante.h"
+#include <unistd.h>
+
 
 int sm_dante()
 {
-    int size_x = 20;
-    int size_y = 20;
-    int **maze = init_map(size_x, size_y);
-    map_t map = {
-        .size_x = size_x,
-        .size_y = size_y,
-        .map = maze
-    };
 
-    Point start = {0, 0};
-    Point end = {size_x - 2 , size_y - 2};
+    while(1) {
+        dante_t dante;
 
-    //print_int_map(map.map, size_x, size_y);
-    dante_generator(&map, size_x, size_y);
-    //print_int_map(map.map, size_x, size_y);
-    dante_algorithm(size_x, size_y, map.map, start, end);
-    //print_map(map.map, size_x, size_y);
-    gameplay(&map, start, end);
+        //Menu de configuration
+        if (menu(&dante) == 1) {
+            printf("Goodbye\n");
+            return 0;
+        }
+
+        //Initialisation du labyrinthe
+        int size_x = dante.map->size_x;
+        int size_y = dante.map->size_y;
+        int **maze = init_map(size_x, size_y);
+        map_t map = {
+            .size_x = size_x,
+            .size_y = size_y,
+            .map = maze
+        };
+        Point start = {0, 0};
+        Point end = {size_x - 2 , size_y - 2};
+        dante.start = start;
+        dante.end = end;
+        dante.map = &map;
+        dante.timer = create_timer(dante.map->size_x * dante.map->size_y / (dante.difficulty * 2));
+
+        //Generation et vérification du labyrinthe
+        dante_generator(dante.map, dante.map->size_x, dante.map->size_y);
+        dante_algorithm(dante.map->size_x, dante.map->size_y, dante.map->map, dante.start, dante.end);
+
+        //Début du jeu
+        gameplay(&dante);
+    }
     return 0;
 }
