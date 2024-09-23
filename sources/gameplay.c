@@ -15,9 +15,7 @@ int print_map_ncurses(map_t *map, Point start, Point end, Point player)
             if (i - 1 == player.y && j - 1 == player.x) {
                 mvprintw(i, j, "P");
             } else if (i -1 == end.y && j - 1 == end.x) {
-                mvprintw(i, j, "E");
-            } else if (i - 1 == start.y && j - 1 == start.x) {
-                mvprintw(i, j, "S");
+                mvprintw(i, j, "O");
             } else if (map->map[i - 1][j - 1] == 0) {
                 mvprintw(i, j, "#");
             } else if (map->map[i - 1][j - 1] == 1) {
@@ -118,9 +116,17 @@ int gameplay(dante_t *dante)
         switch (is_end_game(player, end, timer)) {
             case 1:
                 is_end = true;
+                clear();
+                mvprintw(map->size_y / 2, map->size_x / 2, "You win !");
+                refresh();
+                napms(2000);
                 break;
             case 2:
                 is_end = true;
+                clear();
+                mvprintw(map->size_y / 2, map->size_x / 2, "You lose !");
+                refresh();
+                napms(2000);
                 break;
             default:
                 break;
@@ -150,7 +156,7 @@ int menu(dante_t *dante) {
     int n_choices = sizeof(choices) / sizeof(char *);
     int x = 10;    // Valeur par défaut pour la largeur du labyrinthe
     int y = 10;    // Valeur par défaut pour la hauteur du labyrinthe
-    int difficulty = 5; // Valeur par défaut pour la difficulté
+    int difficulty = 1; // Valeur par défaut pour la difficulté
 
     while (1) {
         clear();

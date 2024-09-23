@@ -7,9 +7,9 @@ int dante_algorithm(int N, int M, int **maze, Point start, Point end)
 {
     // Appel de BFS
     if (bfs(N, M, maze, start, end)) {
-        printf("Chemin trouvé !\n");
+        return 0;
     } else {
-        printf("Pas de chemin disponible.\n");
+        return 1;
     }
 
     return 0;

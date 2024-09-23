@@ -36,11 +36,13 @@ int sm_dante()
         dante.start = start;
         dante.end = end;
         dante.map = &map;
-        dante.timer = create_timer(dante.map->size_x * dante.map->size_y / (dante.difficulty * 2));
+        dante.timer = create_timer(dante.map->size_x * dante.map->size_y / (dante.difficulty * 4));
 
         //Generation et vérification du labyrinthe
         dante_generator(dante.map, dante.map->size_x, dante.map->size_y);
-        dante_algorithm(dante.map->size_x, dante.map->size_y, dante.map->map, dante.start, dante.end);
+        if (dante_algorithm(dante.map->size_x, dante.map->size_y, dante.map->map, dante.start, dante.end) == 1) {
+            continue;
+        }
 
         //Début du jeu
         gameplay(&dante);
